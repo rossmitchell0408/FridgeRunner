@@ -6,7 +6,7 @@ public class CharacterController : MonoBehaviour
 {
     private Rigidbody rBod;
     [SerializeField]
-    private float moveForce;
+    private float acceleration;
     [SerializeField]
     private float maxSpeed;
     [SerializeField]
@@ -27,10 +27,15 @@ public class CharacterController : MonoBehaviour
     {
         if (rBod.velocity.magnitude <= maxSpeed)
         {
-            rBod.AddForce(transform.forward * Input.GetAxis("Vertical") * moveForce * Time.fixedDeltaTime);
+            rBod.AddForce(transform.forward * Input.GetAxis("Vertical") * acceleration * Time.fixedDeltaTime);
         }
 
         transform.Rotate(0, Input.GetAxis("Horizontal") * turnSpeed * Time.fixedDeltaTime, 0);
+
+        if (Input.GetAxis("Horizontal") == 0f)
+        {
+            transform.Rotate(0, 0, 0);
+        }
 
         //Debug.Log(rBod.velocity.magnitude);
     }
