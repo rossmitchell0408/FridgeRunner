@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyController : MonoBehaviour
+public class EnemyFlee : MonoBehaviour
 {
     private Rigidbody rBod;
     [SerializeField]
     private Collider sightCollider;
     [SerializeField]
     private bool isSeeingTarget;
-    [SerializeField]
-    private GameObject target;
 
 
     [SerializeField]
     private NavMeshAgent agent;
+    [SerializeField]
+    private Transform chaser;
 
 
     // Start is called before the first frame update
@@ -36,12 +36,13 @@ public class EnemyController : MonoBehaviour
         {
             return;
         }
-        if (target == null)
+        if (chaser == null)
         {
             return;
         }
 
-        agent.SetDestination(target.transform.position);
+        Vector3 direction = (chaser.position - transform.position).normalized;
+        agent.SetDestination(transform.position - direction);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -49,7 +50,7 @@ public class EnemyController : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             isSeeingTarget = true;
-            target = other.gameObject;
+            chaser = other.transform;
         }
     }
 
@@ -58,7 +59,7 @@ public class EnemyController : MonoBehaviour
         if (other.tag == "Player")
         {
             isSeeingTarget = false;
-            target = null;
+            chaser = null;
         }
     }
 
