@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour
 {
@@ -15,6 +16,12 @@ public class EnemyController : MonoBehaviour
     private bool isSeeingTarget;
     [SerializeField]
     private GameObject target;
+
+
+    [SerializeField]
+    private NavMeshAgent agent;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,13 +45,14 @@ public class EnemyController : MonoBehaviour
             return;
         }
 
-        Vector3 direction = (target.transform.position - transform.position).normalized;
+        //Vector3 direction = (target.transform.position - transform.position).normalized;
         //rBod.MovePosition(target.transform.position);
+        agent.SetDestination(target.transform.position);
 
-        if (rBod.velocity.magnitude <= maxSpeed)
-        {
-            rBod.AddForce(direction * acceleration * Time.fixedDeltaTime);
-        }
+        //if (rBod.velocity.magnitude <= maxSpeed)
+        //{
+        //    rBod.AddForce(direction * acceleration * Time.fixedDeltaTime);
+        //}
 
         transform.LookAt(target.transform);
     }
