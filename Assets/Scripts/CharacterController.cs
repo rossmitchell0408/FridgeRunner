@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class CharacterController : MonoBehaviour
 {
+    // temp
+    [SerializeField]
+    private StateManager stateManager;
+
     private Rigidbody rBod;
     [SerializeField]
     private float acceleration;
@@ -11,6 +15,8 @@ public class CharacterController : MonoBehaviour
     private float maxSpeed;
     [SerializeField]
     private float turnSpeed;
+
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +27,13 @@ public class CharacterController : MonoBehaviour
     void FixedUpdate()
     {
         Move();
+
+        // temp
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            Debug.Log("Popping");
+            stateManager.PopState();
+        }
     }
     
     void Move()

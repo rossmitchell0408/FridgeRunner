@@ -227,12 +227,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1057a66acb46fa479005e953eb7e017, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  acceleration: 0
-  maxSpeed: 10
   sightCollider: {fileID: 112822988375477016}
-  isSeeingTarget: 0
+  contactCollider: {fileID: 0}
   target: {fileID: 0}
   agent: {fileID: -650064304104529598}
+  chaseMode: 0
 --- !u!135 &112822988375477016
 SphereCollider:
   m_ObjectHideFlags: 0

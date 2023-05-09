@@ -331,7 +331,7 @@ Transform:
   - {fileID: 3906522448355184640}
   - {fileID: 9200285884338177960}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1543764317479801061
 MeshFilter:
@@ -419,17 +419,15 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3702242585155645495}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d1057a66acb46fa479005e953eb7e017, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  acceleration: 0
-  maxSpeed: 10
   sightCollider: {fileID: 112822988375477016}
-  isSeeingTarget: 0
   target: {fileID: 0}
   agent: {fileID: -650064304104529598}
+  chaseMode: 1
 --- !u!135 &112822988375477016
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -472,15 +470,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3702242585155645495}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fa38667c856d99249ac3cdea4bc7ef94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  acceleration: 0
-  maxSpeed: 0
   sightCollider: {fileID: 112822988375477016}
   isSeeingTarget: 0
-  target: {fileID: 0}
   agent: {fileID: -650064304104529598}
   chaser: {fileID: 0}

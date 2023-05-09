@@ -5,17 +5,29 @@ using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour
 {
+    private enum ChaseMode
+    {
+        IDLE = -1,
+        CHASE = 0,
+        FLEE = 1
+    }
+
     private Rigidbody rBod;
     [SerializeField]
     private Collider sightCollider;
     [SerializeField]
-    private bool isSeeingTarget;
+    private Collider contactCollider;
+    //[SerializeField]
+    //private bool isSeeingTarget;
     [SerializeField]
-    private GameObject target;
+    private Transform target;
 
 
     [SerializeField]
     private NavMeshAgent agent;
+
+    [SerializeField]
+    private ChaseMode chaseMode;
 
 
     // Start is called before the first frame update
@@ -32,24 +44,39 @@ public class EnemyController : MonoBehaviour
 
     private void Move()
     {
-        if (!isSeeingTarget)
-        {
-            return;
-        }
+        //if (!isSeeingTarget)
+        //{
+        //    return;
+        //}
         if (target == null)
         {
             return;
         }
 
-        agent.SetDestination(target.transform.position);
+        switch (chaseMode)
+        {
+            case ChaseMode.IDLE:
+                break;
+            case ChaseMode.CHASE:
+                agent.SetDestination(target.position);
+                break;
+            case ChaseMode.FLEE:
+                Vector3 direction = (target.position - transform.position).normalized;
+                agent.SetDestination(transform.position - direction);
+                break;
+            default:
+                break;
+        }
+
+        
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
-            isSeeingTarget = true;
-            target = other.gameObject;
+            //isSeeingTarget = true;
+            target = other.transform;
         }
     }
 
@@ -57,8 +84,29 @@ public class EnemyController : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            isSeeingTarget = false;
+            //isSeeingTarget = false;
             target = null;
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            //Destroy(gameObject);
+            switch (chaseMode)
+            {
+                case ChaseMode.IDLE:
+                    break;
+                case ChaseMode.CHASE:
+                    Debug.Log("Got you!");
+                    break;
+                case ChaseMode.FLEE:
+                    Debug.Log("You got me!");
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
