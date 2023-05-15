@@ -310,7 +310,7 @@ GameObject:
   - component: {fileID: 8835811847054150592}
   m_Layer: 0
   m_Name: Toaster
-  m_TagString: Untagged
+  m_TagString: Target
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -425,6 +425,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sightCollider: {fileID: 112822988375477016}
+  contactCollider: {fileID: 0}
   target: {fileID: 0}
   agent: {fileID: -650064304104529598}
   chaseMode: 1

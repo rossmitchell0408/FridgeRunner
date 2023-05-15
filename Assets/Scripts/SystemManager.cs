@@ -6,9 +6,11 @@ using UnityEngine.UI;
 public class SystemManager : MonoBehaviour
 {
     [SerializeField]
-    GameObject titlePanel;
+    private GameObject titlePanel;
     [SerializeField]
-    GameObject game;
+    private GameObject game;
+    [SerializeField]
+    private GameObject winPanel;
 
 
     void Start()
@@ -20,6 +22,7 @@ public class SystemManager : MonoBehaviour
     {
         titlePanel.SetActive(false);
         game.SetActive(false);
+        winPanel.SetActive(false);
 
         switch (StateManager.gameState.Peek())
         {
@@ -28,6 +31,9 @@ public class SystemManager : MonoBehaviour
                 break;
             case StateManager.GameState.Game:
                 game.SetActive(true);
+                break;
+            case StateManager.GameState.Win:
+                winPanel.SetActive(true);
                 break;
             default:
                 break;

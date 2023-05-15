@@ -12,6 +12,9 @@ public class EnemyController : MonoBehaviour
         FLEE = 1
     }
 
+    [SerializeField]
+    private GameManager gameManager;
+
     private Rigidbody rBod;
     [SerializeField]
     private Collider sightCollider;
@@ -34,6 +37,19 @@ public class EnemyController : MonoBehaviour
     void Start()
     {
         rBod = GetComponent<Rigidbody>();
+        gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
+
+        if (gameManager == null)
+        {
+            StartCoroutine(LateStart(1));
+        }
+
+    }
+    
+    IEnumerator LateStart(float delaySeconds)
+        {
+            yield return new WaitForSeconds(delaySeconds);
+        gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -103,6 +119,8 @@ public class EnemyController : MonoBehaviour
                     break;
                 case ChaseMode.FLEE:
                     Debug.Log("You got me!");
+                    gameManager.RemoveTarget(gameObject);
+                    Destroy(gameObject);
                     break;
                 default:
                     break;
